@@ -101,6 +101,7 @@ while gameend==('0'):
 		print ("F:" + FORWARD + "B:" + BACKWARD)
 		print ("L:" + LEFTWARD + "R:" + RIGHTWARD)
 	#gameend = ('1') #REMEMBER TO REMOVE THIS ONCE MAIN LOOP IS FUNCTIONAL
+	#POV image selection.
 	if (FORWARD==('0') and LEFTWARD==('1') and RIGHTWARD==('1') and BACKWARD==('0')):
 		POVVIEW = ('./TCR/MAZE0.TCR')
 	if (FORWARD==('1') and LEFTWARD==('1') and RIGHTWARD==('1') and BACKWARD==('0')):
@@ -131,16 +132,19 @@ while gameend==('0'):
 		POVVIEW = ('./TCR/MAZED.TCR')
 	if (FORWARD==('0') and LEFTWARD==('1') and RIGHTWARD==('1') and BACKWARD==('1')):
 		POVVIEW = ('./TCR/MAZEE.TCR')
+	#draw selected POV image
 	i = open(POVVIEW)
 	POVTCR = i.read()
 	print (POVTCR)
 	i.close()
 	usrentry = ('null')
+	#user prompt loop
 	while (usrentry!=FORWARDWORDBIND and usrentry!=BACKWARDWORDBIND and usrentry!=LEFTWORDBIND and usrentry!=RIGHTWODBIND and usrentry!=QUITWORDBIND):
 		print ("forward:" + FORWARDWORDBIND + " | backward:" + BACKWARDWORDBIND)
 		print ("left:" + LEFTWORDBIND + " | right:" + RIGHTWODBIND + " | quit:" + QUITWORDBIND)
 		usrentry = raw_input(':')
 	print (chr(27) + "[2J" + chr(27) + "[H")
+	#wall detection logic
 	if usrentry==BACKWARDWORDBIND:
 		BIND1 = playy - 1
 		if lookpoint(playx, BIND1)==('1'):
@@ -165,17 +169,11 @@ while gameend==('0'):
 			print (CANTMOVE)
 		elif lookpoint(BIND3, playy)==('0'):
 			playx -= 1
+	#misic user commands
 	if usrentry==QUITWORDBIND:
 		gameend=('1')
+	#game win check
 	if (playx==endposx and playy==endposy):
 		print(WINGAME)
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+		gameend=('1')
+
